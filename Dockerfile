@@ -23,14 +23,19 @@
 FROM jenkinsci/jnlp-slave:3.27-1
 MAINTAINER Hank Hwang <mysticPrg@gmail.com>
 
+# install node v10
 USER root
-
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
-
 RUN node --version
 
+# setting npm global path
 USER jenkins
+ENV PATH $PATH:~/.npm-global/bin
+RUN mkdir ~/.npm-global
+RUN npm config set prefix '~/.npm-global'
+
+# install yarn
 RUN npm install -g yarn
 
 ENTRYPOINT ["jenkins-slave"]
