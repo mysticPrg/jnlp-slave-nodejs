@@ -31,7 +31,7 @@ RUN node --version
 
 # setting npm global path
 USER jenkins
-ENV PATH $PATH:~/.npm-global/bin
+ENV PATH $PATH:/home/jenkins/.npm-global/bin
 RUN mkdir ~/.npm-global
 RUN npm config set prefix '~/.npm-global'
 
